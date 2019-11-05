@@ -30,6 +30,9 @@ module.exports = {
     'react-hooks/rules-of-hooks' : 'error',
     'react-hooks/exhaustive-deps' : 'off',
     'jsx-quotes': ['warn', 'prefer-single'],
-    'react/jsx-filename-extension': [1, { 'extensions': ['.js', '.jsx'] }]
+    'react/jsx-filename-extension': [1, { 'extensions': ['.js', '.jsx'] }],
+    'comma-dangle': 'off',
+    'arrow-body-style' : 'off',
+    'import/prefer-default-export': 'warn'
   },
 };

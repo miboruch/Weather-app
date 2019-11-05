@@ -1,9 +1,13 @@
 import React from 'react';
+import LandingPage from './components/pages/LandingPage';
+import MainTemplate from './template/MainTemplate';
 
 function App() {
   return (
     <>
-      <h1>hello</h1>
+      <MainTemplate>
+        <LandingPage />
+      </MainTemplate>
     </>
   );
 }

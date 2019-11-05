@@ -33,6 +33,10 @@ module.exports = {
     'react/jsx-filename-extension': [1, { 'extensions': ['.js', '.jsx'] }],
     'comma-dangle': 'off',
     'arrow-body-style' : 'off',
-    'import/prefer-default-export': 'warn'
+    'implicit-arrow-linebreak': 'off',
+    'operator-linebreak': 'off',
+    'arrow-parens': 'off',
+    'import/prefer-default-export': 'off',
+    'indent': 'off'
   },
 };

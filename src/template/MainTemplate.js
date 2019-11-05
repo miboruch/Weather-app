@@ -4,6 +4,8 @@ import PropTypes from 'prop-types';
 import SEO from '../components/SEO/SEO';
 import GlobalStyle from '../assets/styles/GlobalStyle';
 import theme from '../assets/styles/theme';
+import Hamburger from '../components/atoms/Hamburger';
+import MenuContextProvider from '../context/MenuContext';
 
 const StyledWrapper = styled.div`
   width: 100%;
@@ -14,7 +16,12 @@ const MainTemplate = ({ children }) => {
     <StyledWrapper>
       <SEO />
       <GlobalStyle />
-      <ThemeProvider theme={theme}>{children}</ThemeProvider>
+      <MenuContextProvider>
+        <ThemeProvider theme={theme}>
+          <Hamburger />
+          {children}
+        </ThemeProvider>
+      </MenuContextProvider>
     </StyledWrapper>
   );
 };

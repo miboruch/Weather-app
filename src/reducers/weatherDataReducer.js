@@ -4,7 +4,8 @@ export const FETCH_FAILURE = 'FETCH_FAILURE';
 
 const initialState = {
   loading: false,
-  data: {},
+  cityData: null,
+  weatherData: null,
   success: false,
   error: null
 };
@@ -22,7 +23,8 @@ export const weatherDataReducer = (state = initialState, action) => {
         ...state,
         loading: false,
         success: true,
-        data: action.payload.response
+        cityData: action.payload.cityData,
+        weatherData: action.payload.weatherData
       };
     case FETCH_FAILURE:
       return {

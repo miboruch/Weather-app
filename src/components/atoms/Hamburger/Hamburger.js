@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import styled, { css } from 'styled-components';
-import { MenuContext } from '../../context/MenuContext';
+import { MenuContext } from '../../../context/MenuContext';
 
 const StyledHamburger = styled.button`
   cursor: pointer;

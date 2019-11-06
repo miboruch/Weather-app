@@ -1,8 +1,15 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { connect } from 'react-redux';
+import { getWeatherData } from './actions/weatherDataActions';
 import LandingPage from './components/pages/LandingPage';
 import MainTemplate from './template/MainTemplate';
 
-function App() {
+const App = ({ getWeather }) => {
+  useEffect(() => {
+    console.log('wtf');
+    getWeather('Tarnow', 'pl');
+  }, []);
+
   return (
     <>
       <MainTemplate>
@@ -10,6 +17,15 @@ function App() {
       </MainTemplate>
     </>
   );
-}
+};
 
-export default App;
+const mapDispatchToProps = dispatch => {
+  return {
+    getWeather: (city, country) => dispatch(getWeatherData(city, country))
+  };
+};
+
+export default connect(
+  null,
+  mapDispatchToProps
+)(App);

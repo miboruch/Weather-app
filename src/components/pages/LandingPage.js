@@ -1,6 +1,7 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import styled from 'styled-components';
-
+import { getWeatherData } from '../../actions/weatherDataActions';
 import hero from '../../assets/images/hero.jpg';
 
 const StyledWrapper = styled.div`

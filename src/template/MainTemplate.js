@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import SEO from '../components/SEO/SEO';
 import GlobalStyle from '../assets/styles/GlobalStyle';
 import theme from '../assets/styles/theme';
-import Hamburger from '../components/atoms/Hamburger';
+import Hamburger from '../components/atoms/Hamburger/Hamburger';
 import MenuContextProvider from '../context/MenuContext';
 
 const StyledWrapper = styled.div`

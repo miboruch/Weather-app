@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { getWeatherData } from '../../actions/weatherDataActions';
 import hero from '../../assets/images/hero.jpg';
@@ -15,7 +16,11 @@ const StyledWrapper = styled.div`
   left: 0;
 `;
 
-const LandingPage = () => {
+const LandingPage = ({ lat, long }) => {
+  useEffect(() => {
+    console.log(lat, long);
+  }, [lat]);
+
   return (
     <StyledWrapper>
       <h1>hello</h1>
@@ -23,4 +28,8 @@ const LandingPage = () => {
   );
 };
 
-export default LandingPage;
+const mapStateToProps = ({ locationReducer: { lat, long } }) => {
+  return { lat, long };
+};
+
+export default connect(mapStateToProps)(LandingPage);

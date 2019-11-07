@@ -35,9 +35,19 @@ export const getWeatherData = (city, country) => async dispatch => {
       `https://api.openweathermap.org/data/2.5/forecast?q=${city},${country}&APPID=${API_KEY}&units=metric`
     );
     dispatch(fetchSuccess(result.data));
-    console.log(result.data);
   } catch (e) {
     dispatch(fetchFailure(e));
-    console.log(e);
+  }
+};
+
+export const getLocationWeatherData = (lat, lon) => async dispatch => {
+  dispatch(fetchStart());
+  try {
+    const result = await axios.get(
+      `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&APPID=${API_KEY}&units=metric`
+    );
+    dispatch(fetchSuccess(result.data));
+  } catch (error) {
+    dispatch(fetchFailure(error));
   }
 };

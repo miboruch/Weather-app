@@ -1,12 +1,14 @@
 import React, { useEffect } from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { getWeatherData } from './actions/weatherDataActions';
+import { getLocation } from './actions/locationDataAction';
 import LandingPage from './components/pages/LandingPage';
 import MainTemplate from './template/MainTemplate';
 
-const App = ({ getWeather }) => {
+const App = ({ getWeather, getGeolocation }) => {
   useEffect(() => {
-    console.log('wtf');
+    getGeolocation();
     getWeather('Tarnow', 'pl');
   }, []);
 
@@ -21,8 +23,14 @@ const App = ({ getWeather }) => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    getWeather: (city, country) => dispatch(getWeatherData(city, country))
+    getWeather: (city, country) => dispatch(getWeatherData(city, country)),
+    getGeolocation: () => dispatch(getLocation())
   };
+};
+
+App.propTypes = {
+  getWeather: PropTypes.func.isRequired,
+  getGeolocation: PropTypes.func.isRequired
 };
 
 export default connect(

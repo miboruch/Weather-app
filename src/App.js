@@ -5,11 +5,13 @@ import { getWeatherData } from './actions/weatherDataActions';
 import { getLocation } from './actions/locationDataAction';
 import LandingPage from './components/pages/LandingPage';
 import MainTemplate from './template/MainTemplate';
+import { loadCities } from './actions/loadCitiesAction';
 
-const App = ({ getWeather, getGeolocation }) => {
+const App = ({ getWeather, getGeolocation, loadCities }) => {
   useEffect(() => {
     getGeolocation();
     getWeather('Tarnow', 'pl');
+    loadCities();
   }, []);
 
   return (
@@ -24,7 +26,8 @@ const App = ({ getWeather, getGeolocation }) => {
 const mapDispatchToProps = dispatch => {
   return {
     getWeather: (city, country) => dispatch(getWeatherData(city, country)),
-    getGeolocation: () => dispatch(getLocation())
+    getGeolocation: () => dispatch(getLocation()),
+    loadCities: () => dispatch(loadCities())
   };
 };
 

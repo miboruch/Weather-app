@@ -2,8 +2,10 @@ import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
+import WeatherBox from '../templates/WeatherBox/WeatherBox';
 import { getWeatherData } from '../../actions/weatherDataActions';
 import hero from '../../assets/images/hero.jpg';
+import CityInformation from '../molecules/CityInformation/CityInformation';
 
 const StyledWrapper = styled.div`
   width: 100%;
@@ -23,7 +25,7 @@ const LandingPage = ({ lat, long }) => {
 
   return (
     <StyledWrapper>
-      <h1>hello</h1>
+      <WeatherBox />
     </StyledWrapper>
   );
 };

@@ -4,7 +4,9 @@ const theme = {
     s: '1.2rem',
     m: '1.6rem',
     l: '2.0rem',
-    xl: '2.4rem'
+    xl: '2.4rem',
+    city: '4.2rem',
+    temperature: '6.6rem'
   },
   color: {
     background: '#000'

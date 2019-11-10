@@ -20,43 +20,33 @@ const StyledHamburger = styled.button`
 
 const InnerHamburger = styled.div`
   width: 28px;
-  height: 1px;
+  height: 2px;
   position: relative;
-  background: #000;
-  transition: background 0.4s ease;
+  background: #fff;
+  transition: all 0.4s ease;
   ${({ isOpen }) =>
     isOpen &&
     css`
-      background: transparent;
+      top: 0;
+      transform: rotate(-43deg);
     `}
-  ::before,
-  ::after {
+
+  ::before {
+    top: 6px;
+    transform: rotate(0);
     content: '';
-    width: 28px;
-    height: 1px;
-    background: #000;
+    width: 18px;
+    height: 2px;
+    background: #fff;
     position: absolute;
     left: 0;
     transition: all 0.5s ease;
-  }
-  ::before {
-    top: -6px;
-    transform: rotate(0);
     ${({ isOpen }) =>
       isOpen &&
       css`
         top: 0;
-        transform: rotate(43deg);
-      `}
-  }
-  ::after {
-    top: 6px;
-    transform: rotate(0);
-    ${({ isOpen }) =>
-      isOpen &&
-      css`
-        top: 0;
-        transform: rotate(-43deg);
+        transform: rotate(85deg);
+        width: 28px;
       `}
   }
 `;

@@ -4,9 +4,10 @@ const Paragraph = styled.p`
   color: white;
   font-size: ${({ theme }) => theme.fontSize.s};
   letter-spacing: 2px;
-  padding: 2rem;
+  padding: .7rem 2rem;
   transition: opacity 0.5s ease, visibility 0.5s ease;
   margin: 0;
+  
   ${({ small }) =>
     small &&
     css`
@@ -26,13 +27,13 @@ const Paragraph = styled.p`
     temperature &&
     css`
       font-size: ${({ theme }) => theme.fontSize.temperature};
-      padding: 0;
+      font-weight: 200;
+      padding: 0 2rem 2rem 2rem;
     `}
   ${({ city }) =>
     city &&
     css`
       font-size: ${({ theme }) => theme.fontSize.city};
-      padding: 0;
     `}
   ${({ error }) =>
     error &&

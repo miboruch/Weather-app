@@ -1,25 +1,37 @@
 import React from 'react';
 import styled from 'styled-components';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 import Paragraph from '../../atoms/Paragraph/Paragraph';
+import { weekDays } from '../../utils/weekDays';
 
 const StyledWrapper = styled.div`
   width: 100%;
-  text-align: center;
   display: flex;
   flex-direction: column;
-  justify-content: center;
 `;
 
-const CityInformation = () => {
+const CityInformation = ({ cityData: { population, name } }) => {
+  const currentData = new Date().toLocaleString();
+  const weekDay = weekDays[new Date().getDay()];
+
+  // console.log(weatherData[0].main.temp);
   return (
     <StyledWrapper>
-      <Paragraph city>Krakow</Paragraph>
-      <Paragraph temperature>
-        16<sup>o</sup>
-      </Paragraph>
-      <Paragraph large>Most cloudy</Paragraph>
+      <Paragraph city>{name}</Paragraph>
+      <Paragraph medium>{weekDay} {currentData}</Paragraph>
+      <Paragraph large> Population: {population}</Paragraph>
     </StyledWrapper>
   );
 };
 
-export default CityInformation;
+const mapStateToProps = ({ weatherDataReducer: { cityData, weatherData } }) => {
+  return { cityData, weatherData };
+};
+
+CityInformation.propTypes = {
+  cityData: PropTypes.object.isRequired,
+  population: PropTypes.number.isRequired
+};
+
+export default connect(mapStateToProps)(CityInformation);

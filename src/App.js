@@ -6,11 +6,14 @@ import { getLocation } from './actions/locationDataAction';
 import LandingPage from './components/pages/LandingPage';
 import MainTemplate from './template/MainTemplate';
 import { loadCities } from './actions/loadCitiesAction';
+import Spinner from './components/Spinner/Spinner';
 
-const App = ({ getWeather, getGeolocation, loadCities }) => {
+const App = ({ getWeather, getGeolocation, loadCities, loading, citiesLoading }) => {
+  console.log(loading);
+  console.log(citiesLoading);
   useEffect(() => {
     getGeolocation();
-    getWeather('Tarnow', 'pl');
+    getWeather('Krakow', 'pl');
     loadCities();
   }, []);
 
@@ -21,6 +24,13 @@ const App = ({ getWeather, getGeolocation, loadCities }) => {
       </MainTemplate>
     </>
   );
+};
+
+const mapStateToProps = ({
+  weatherDataReducer: { loading },
+  loadCitiesReducer: { citiesLoading }
+}) => {
+  return { loading, citiesLoading };
 };
 
 const mapDispatchToProps = dispatch => {
@@ -37,6 +47,6 @@ App.propTypes = {
 };
 
 export default connect(
-  null,
+  mapStateToProps,
   mapDispatchToProps
 )(App);

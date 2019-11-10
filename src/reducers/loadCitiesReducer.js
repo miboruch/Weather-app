@@ -3,7 +3,7 @@ export const LOAD_SUCCESS = 'LOAD_SUCCESS';
 export const LOAD_FAILURE = 'LOAD_FAILURE';
 
 const initialState = {
-  loading: false,
+  citiesLoading: true,
   cities: undefined,
   error: null
 };
@@ -13,19 +13,19 @@ export const loadCitiesReducer = (state = initialState, action) => {
     case LOAD_START:
       return {
         ...state,
-        loading: true,
         error: null
       };
     case LOAD_SUCCESS:
       return {
         ...state,
         cities: action.payload.response,
-        loading: false
+        error: null,
+        citiesLoading: false
       };
     case LOAD_FAILURE:
       return {
         ...state,
-        loading: false,
+        citiesLoading: false,
         error: action.payload.error
       };
     default:

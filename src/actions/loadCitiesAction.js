@@ -31,7 +31,7 @@ export const loadCities = () => async dispatch => {
   try {
     const result = await axios.get('city.list.json');
 
-    dispatch(loadSuccess(result));
+    dispatch(loadSuccess(result.data));
   } catch (error) {
     dispatch(loadFailure(error));
   }

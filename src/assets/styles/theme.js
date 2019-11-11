@@ -1,4 +1,9 @@
 const theme = {
+  font: {
+    family: {
+      montserrat: 'Montserrat'
+    }
+  },
   fontSize: {
     xs: '1.0rem',
     s: '1.2rem',

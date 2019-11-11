@@ -39,6 +39,7 @@ module.exports = {
     'import/prefer-default-export': 'off',
     'indent': 'off',
     'react/jsx-one-expression-per-line': 'off',
-    'react/prop-types': 'off'
+    'react/prop-types': 'off',
+    'react/require-default-props': 'off'
   },
 };

@@ -15,7 +15,6 @@ const CityInformation = ({ cityData: { population, name } }) => {
   const currentData = new Date().toLocaleString();
   const weekDay = weekDays[new Date().getDay()];
 
-  // console.log(weatherData[0].main.temp);
   return (
     <StyledWrapper>
       <Paragraph city>{name}</Paragraph>

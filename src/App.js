@@ -1,16 +1,16 @@
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import { getWeatherData } from './actions/weatherDataActions';
 import { getLocation } from './actions/locationDataAction';
-import LandingPage from './components/pages/LandingPage';
+import WeatherPage from './pages/WeatherPage';
+import LandingPage from './pages/LandingPage';
 import MainTemplate from './template/MainTemplate';
 import { loadCities } from './actions/loadCitiesAction';
 import Spinner from './components/Spinner/Spinner';
 
 const App = ({ getWeather, getGeolocation, loadCities, loading, citiesLoading }) => {
-  console.log(loading);
-  console.log(citiesLoading);
   useEffect(() => {
     getGeolocation();
     getWeather('Krakow', 'pl');
@@ -18,11 +18,14 @@ const App = ({ getWeather, getGeolocation, loadCities, loading, citiesLoading })
   }, []);
 
   return (
-    <>
+    <Router>
       <MainTemplate>
-        <LandingPage />
+        <Switch>
+          <Route path='/' component={LandingPage} />
+          <Route path='/weather/:query' component={WeatherPage} />
+        </Switch>
       </MainTemplate>
-    </>
+    </Router>
   );
 };
 

@@ -20,7 +20,13 @@ const StyledWrapper = styled.div`
 
 const WeatherPage = ({ loading, getWeather, name, country }) => {
   useEffect(() => {
-    getWeather(name, country);
+    const savedName = localStorage.getItem('name');
+    const savedCountry = localStorage.getItem('country');
+    if (localStorage.getItem('name') && localStorage.getItem('country')) {
+      getWeather(savedName, savedCountry);
+    } else {
+      getWeather(name, country);
+    }
   }, []);
   return <StyledWrapper>{loading ? <Spinner /> : <WeatherBox />}</StyledWrapper>;
 };

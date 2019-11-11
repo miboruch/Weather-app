@@ -6,6 +6,8 @@ import {
 } from '../reducers/searchCityReducer';
 
 const searchStart = () => {
+  localStorage.removeItem('name');
+  localStorage.removeItem('country');
   return {
     type: SEARCH_START
   };
@@ -30,6 +32,8 @@ const searchFailure = error => {
 };
 
 export const setChosenCity = (name, country) => {
+  localStorage.setItem('name', name);
+  localStorage.setItem('country', country);
   return {
     type: SET_CHOSEN_CITY,
     payload: {

@@ -1,4 +1,9 @@
-import { SEARCH_START, SEARCH_SUCCESS, SEARCH_FAILURE } from '../reducers/searchCityReducer';
+import {
+  SEARCH_START,
+  SEARCH_SUCCESS,
+  SEARCH_FAILURE,
+  SET_CHOSEN_CITY
+} from '../reducers/searchCityReducer';
 
 const searchStart = () => {
   return {
@@ -20,6 +25,16 @@ const searchFailure = error => {
     type: SEARCH_FAILURE,
     payload: {
       error
+    }
+  };
+};
+
+export const setChosenCity = (name, country) => {
+  return {
+    type: SET_CHOSEN_CITY,
+    payload: {
+      name,
+      country
     }
   };
 };

@@ -5,6 +5,7 @@ import styled from 'styled-components';
 import WeatherBox from '../components/templates/WeatherBox/WeatherBox';
 import Spinner from '../components/Spinner/Spinner';
 import { backgroundURL } from '../components/utils/variables';
+import { getWeatherData } from '../actions/weatherDataActions';
 
 const StyledWrapper = styled.div`
   width: 100%;
@@ -17,16 +18,34 @@ const StyledWrapper = styled.div`
   left: 0;
 `;
 
-const WeatherPage = ({ loading, citiesLoading }) => {
-  return <StyledWrapper>{loading || citiesLoading ? <Spinner /> : <WeatherBox />}</StyledWrapper>;
+const WeatherPage = ({ loading, getWeather, name, country }) => {
+  useEffect(() => {
+    getWeather(name, country);
+  }, []);
+  return <StyledWrapper>{loading ? <Spinner /> : <WeatherBox />}</StyledWrapper>;
 };
 
 const mapStateToProps = ({
   locationReducer: { lat, long },
   weatherDataReducer: { loading },
-  loadCitiesReducer: { citiesLoading }
+  searchCityReducer: { name, country }
 }) => {
-  return { lat, long, loading, citiesLoading };
+  return {
+    lat,
+    long,
+    loading,
+    name,
+    country
+  };
 };
 
-export default connect(mapStateToProps)(WeatherPage);
+const mapDispatchToProps = dispatch => {
+  return {
+    getWeather: (name, country) => dispatch(getWeatherData(name, country))
+  };
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(WeatherPage);

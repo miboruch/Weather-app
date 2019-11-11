@@ -40,6 +40,7 @@ module.exports = {
     'indent': 'off',
     'react/jsx-one-expression-per-line': 'off',
     'react/prop-types': 'off',
-    'react/require-default-props': 'off'
+    'react/require-default-props': 'off',
+    'object-curly-newline': 'off'
   },
 };

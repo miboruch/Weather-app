@@ -10,7 +10,7 @@ const StyledInput = styled.input`
   border-bottom: 1px solid #fff;
   font-size: 14px;
   color: #fff;
-  font-family: ${({theme}) => theme.font.family.montserrat}
+  font-family: ${({ theme }) => theme.font.family.montserrat}
   letter-spacing: 2px;
 
   :focus {
@@ -20,7 +20,7 @@ const StyledInput = styled.input`
   ::placeholder {
     font-size: 14px;
     color: #fff;
-    font-family: ${({theme}) => theme.font.family.montserrat}
+    font-family: ${({ theme }) => theme.font.family.montserrat}
     letter-spacing: 2px;
   }
 `;

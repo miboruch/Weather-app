@@ -15,8 +15,8 @@ const StyledOuterSpinner = styled.div`
 `;
 
 const StyledInnerSpinner = styled.div`
-  width: 70px;
-  height: 70px;
+  width: 100px;
+  height: 100px;
   border-radius: 50%;
   border-top: 2px double #fff;
   border-bottom: 2px double transparent;
@@ -37,16 +37,16 @@ const StyledInnerSpinner = styled.div`
   ::before {
     top: 0;
     left: 0;
-    width: 70px;
-    height: 70px;
+    width: 100px;
+    height: 100px;
     border-top: 2px double #ccc;
     animation: ${rotate} 2s linear infinite forwards;
   }
   ::after {
     top: 0;
     left: 0;
-    width: 70px;
-    height: 70px;
+    width: 100px;
+    height: 100px;
     border-top: 2px double #8b8383;
     animation: ${rotate} 1.2s linear infinite forwards;
   }

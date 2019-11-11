@@ -3,10 +3,12 @@ import { connect } from 'react-redux';
 import Paragraph from '../../atoms/Paragraph/Paragraph';
 
 const Temperature = ({ weatherData }) => {
-  console.log(weatherData);
   return (
     <>
-      <Paragraph temperature>{weatherData[0].main.temp}<sup>o</sup>C</Paragraph>
+      <Paragraph temperature>
+        {weatherData[0].main.temp}
+        <sup>o</sup>C
+      </Paragraph>
       <Paragraph large>{weatherData[0].weather[0].main}</Paragraph>
       <Paragraph medium>{weatherData[0].weather[0].description}</Paragraph>
     </>

@@ -3,7 +3,8 @@ import styled from 'styled-components';
 import { Formik, Form } from 'formik';
 import * as Yup from 'yup';
 import { connect } from 'react-redux';
-import { searchCity } from '../actions/searchCityAction';
+import { Link } from 'react-router-dom';
+import { searchCity, setChosenCity } from '../actions/searchCityAction';
 import Paragraph from '../components/atoms/Paragraph/Paragraph';
 import Input from '../components/atoms/Input/Input';
 import Button from '../components/atoms/Button/Button';
@@ -63,7 +64,15 @@ const citySchema = Yup.object().shape({
     .required('This field is required')
 });
 
-const LandingPage = ({ cities, citiesLoading, searchCity, citySearching, result, error }) => {
+const LandingPage = ({
+  cities,
+  citiesLoading,
+  searchCity,
+  citySearching,
+  result,
+  error,
+  setChosenCity
+}) => {
   return (
     <StyledWrapper>
       {citiesLoading ? (
@@ -98,13 +107,18 @@ const LandingPage = ({ cities, citiesLoading, searchCity, citySearching, result,
           {error !== null ? (
             <StyledParagraph>{null}</StyledParagraph>
           ) : (
-            result.map(item => (
-              <StyledResultBox>
-                <StyledParagraphTopPadding large>
-                  {item.name} {item.country}
-                </StyledParagraphTopPadding>
-              </StyledResultBox>
-            ))
+            <StyledResultBox>
+              {result.map((item, index) => (
+                <Link to={'/weather'} key={index}>
+                  <StyledParagraphTopPadding
+                    onClick={() => setChosenCity(item.name, item.country)}
+                    large
+                  >
+                    {item.name} {item.country}
+                  </StyledParagraphTopPadding>
+                </Link>
+              ))}
+            </StyledResultBox>
           )}
         </InnerWrapper>
       )}
@@ -116,12 +130,19 @@ const mapStateToProps = ({
   loadCitiesReducer: { cities, citiesLoading },
   searchCityReducer: { citySearching, result, error }
 }) => {
-  return { cities, citiesLoading, citySearching, result, error };
+  return {
+    cities,
+    citiesLoading,
+    citySearching,
+    result,
+    error
+  };
 };
 
 const mapDispatchToProps = dispatch => {
   return {
-    searchCity: (cityName, loadedCities) => dispatch(searchCity(cityName, loadedCities))
+    searchCity: (cityName, loadedCities) => dispatch(searchCity(cityName, loadedCities)),
+    setChosenCity: (name, country) => dispatch(setChosenCity(name, country))
   };
 };
 

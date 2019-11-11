@@ -11,14 +11,25 @@ const StyledWrapper = styled.div`
   flex-direction: column;
 `;
 
-const CityInformation = ({ cityData: { population, name } }) => {
-  const currentData = new Date().toLocaleString();
-  const weekDay = weekDays[new Date().getDay()];
+const getLocationTime = (timezone) => {
+  const cityTimezone = timezone / 3600;
+  const date = new Date();
+  const currentTimezone = date.getTimezoneOffset() / 60;
+  date.setHours(date.getHours() + (cityTimezone + currentTimezone));
+
+  return date;
+};
+
+const CityInformation = ({ cityData: { population, name, timezone } }) => {
+  const currentData = getLocationTime(timezone).toLocaleString();
+  const weekDay = weekDays[getLocationTime(timezone).getDay()];
 
   return (
     <StyledWrapper>
       <Paragraph city>{name}</Paragraph>
-      <Paragraph medium>{weekDay} {currentData}</Paragraph>
+      <Paragraph medium>
+        {weekDay} {currentData}
+      </Paragraph>
       <Paragraph large> Population: {population}</Paragraph>
     </StyledWrapper>
   );
@@ -29,8 +40,7 @@ const mapStateToProps = ({ weatherDataReducer: { cityData, weatherData } }) => {
 };
 
 CityInformation.propTypes = {
-  cityData: PropTypes.object.isRequired,
-  population: PropTypes.number.isRequired
+  cityData: PropTypes.object.isRequired
 };
 
 export default connect(mapStateToProps)(CityInformation);

@@ -4,21 +4,13 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import Paragraph from '../../atoms/Paragraph/Paragraph';
 import { weekDays } from '../../utils/weekDays';
+import { getLocationTime } from '../../utils/timeFunctions';
 
 const StyledWrapper = styled.div`
   width: 100%;
   display: flex;
   flex-direction: column;
 `;
-
-const getLocationTime = (timezone) => {
-  const cityTimezone = timezone / 3600;
-  const date = new Date();
-  const currentTimezone = date.getTimezoneOffset() / 60;
-  date.setHours(date.getHours() + (cityTimezone + currentTimezone));
-
-  return date;
-};
 
 const CityInformation = ({ cityData: { population, name, timezone } }) => {
   const currentData = getLocationTime(timezone).toLocaleString();

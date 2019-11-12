@@ -105,7 +105,7 @@ const LandingPage = ({
             )}
           </Formik>
           {error !== null ? (
-            <StyledParagraph>{null}</StyledParagraph>
+            <StyledParagraph>{error}</StyledParagraph>
           ) : (
             <StyledResultBox>
               {result.map((item, index) => (

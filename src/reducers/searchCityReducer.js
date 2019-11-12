@@ -17,7 +17,8 @@ export const searchCityReducer = (state = initialState, action) => {
       return {
         ...state,
         result: [],
-        citySearching: true
+        citySearching: true,
+        error: null
       };
     case SEARCH_SUCCESS:
       return {

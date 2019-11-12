@@ -41,6 +41,7 @@ module.exports = {
     'react/jsx-one-expression-per-line': 'off',
     'react/prop-types': 'off',
     'react/require-default-props': 'off',
-    'object-curly-newline': 'off'
+    'object-curly-newline': 'off',
+    'react/jsx-props-no-spreading': 'off'
   },
 };

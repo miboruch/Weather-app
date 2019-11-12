@@ -2,20 +2,41 @@ import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
+import Slider from 'react-slick';
 import WeatherBox from '../components/templates/WeatherBox/WeatherBox';
 import Spinner from '../components/Spinner/Spinner';
 import { backgroundURL } from '../components/utils/variables';
 import { getWeatherData } from '../actions/weatherDataActions';
+import { Link } from 'react-router-dom';
 
 const StyledWrapper = styled.div`
   width: 100%;
   height: 100vh;
   background: url(${backgroundURL});
   background-size: cover;
-  background-position: center;
+  background-position: 30%;
   position: fixed;
   top: 0;
   left: 0;
+`;
+
+const StyledArrowWrapper = styled.div`
+  position: fixed;
+  top: 0.5rem;
+  right: 0.7rem;
+  width: 50px;
+  height: 50px;
+  border: 1px dashed #fff;
+  border-radius: 50%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+`;
+
+const StyledArrowIcon = styled.div`
+  color: white;
+  font-size: 40px;
 `;
 
 const WeatherPage = ({ loading, getWeather, name, country }) => {
@@ -28,7 +49,17 @@ const WeatherPage = ({ loading, getWeather, name, country }) => {
       getWeather(name, country);
     }
   }, []);
-  return <StyledWrapper>{loading ? <Spinner /> : <WeatherBox />}</StyledWrapper>;
+
+  return (
+    <StyledWrapper>
+      <Link to={'/'}>
+        <StyledArrowWrapper>
+          <StyledArrowIcon>&#8672;</StyledArrowIcon>
+        </StyledArrowWrapper>
+      </Link>
+      {loading ? <Spinner /> : <WeatherBox />}
+    </StyledWrapper>
+  );
 };
 
 const mapStateToProps = ({

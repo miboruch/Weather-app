@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { connect } from 'react-redux';
 import CityInformation from '../../molecules/CityInformation/CityInformation';
 import Temperature from '../../molecules/Temperature/Temperature';
+import Forecast from '../../molecules/Forecast/Forecast';
 
 const WeatherWrapper = styled.div`
   width: 100%; /* 50% desktop */
@@ -14,6 +15,7 @@ const WeatherBox = ({ loading, success }) => {
     <WeatherWrapper>
       <CityInformation />
       <Temperature />
+      <Forecast />
     </WeatherWrapper>
   );
 };

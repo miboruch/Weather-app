@@ -17,9 +17,6 @@ const StyledWrapper = styled.div`
   background: url(${backgroundURL});
   background-size: cover;
   background-position: center;
-  position: fixed;
-  top: 0;
-  left: 0;
 `;
 
 const InnerWrapper = styled.section`

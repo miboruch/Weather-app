@@ -11,13 +11,12 @@ import { Link } from 'react-router-dom';
 
 const StyledWrapper = styled.div`
   width: 100%;
-  height: 100vh;
+  min-height: 100vh;
   background: url(${backgroundURL});
   background-size: cover;
   background-position: 30%;
-  position: fixed;
-  top: 0;
-  left: 0;
+  margin: 0;
+  padding: 0;
 `;
 
 const StyledArrowWrapper = styled.div`

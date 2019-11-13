@@ -42,6 +42,7 @@ module.exports = {
     'react/prop-types': 'off',
     'react/require-default-props': 'off',
     'object-curly-newline': 'off',
-    'react/jsx-props-no-spreading': 'off'
+    'react/jsx-props-no-spreading': 'off',
+    'no-nested-ternary': 'off'
   },
 };

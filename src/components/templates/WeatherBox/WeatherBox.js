@@ -1,27 +1,24 @@
 import React from 'react';
 import styled from 'styled-components';
-import { connect } from 'react-redux';
 import CityInformation from '../../molecules/CityInformation/CityInformation';
 import Temperature from '../../molecules/Temperature/Temperature';
 import Forecast from '../../molecules/Forecast/Forecast';
+import Details from '../../molecules/Details/Details';
 
 const WeatherWrapper = styled.div`
   width: 100%; /* 50% desktop */
-  margin-top: 10rem;
+  padding-top: 10rem;
 `;
 
-const WeatherBox = ({ loading, success }) => {
+const WeatherBox = () => {
   return (
     <WeatherWrapper>
       <CityInformation />
       <Temperature />
       <Forecast />
+      <Details />
     </WeatherWrapper>
   );
 };
 
-const mapStateToProps = ({ weatherDataReducer: { loading, success } }) => {
-  return { loading, success };
-};
-
-export default connect(mapStateToProps)(WeatherBox);
+export default WeatherBox;

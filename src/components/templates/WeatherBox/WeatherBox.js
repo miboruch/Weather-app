@@ -7,6 +7,7 @@ import Details from '../../molecules/Details/Details';
 
 const WeatherWrapper = styled.div`
   width: 100%; /* 50% desktop */
+  min-height: 100vh;
   padding-top: 10rem;
 `;
 

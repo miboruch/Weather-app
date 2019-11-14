@@ -12,13 +12,13 @@ const StyledWrapper = styled.div`
   flex-direction: column;
 `;
 
-const CityInformation = ({ cityData: { population, name, timezone } }) => {
+const CityInformation = ({ cityData: { population, name, timezone, country } }) => {
   const currentData = getLocationTime(timezone).toLocaleString();
   const weekDay = weekDays[getLocationTime(timezone).getDay()];
 
   return (
     <StyledWrapper>
-      <Paragraph city>{name}</Paragraph>
+      <Paragraph city>{name}, {country}</Paragraph>
       <Paragraph medium>
         {weekDay} {currentData}
       </Paragraph>
@@ -27,8 +27,8 @@ const CityInformation = ({ cityData: { population, name, timezone } }) => {
   );
 };
 
-const mapStateToProps = ({ weatherDataReducer: { cityData, weatherData } }) => {
-  return { cityData, weatherData };
+const mapStateToProps = ({ weatherDataReducer: { cityData } }) => {
+  return { cityData };
 };
 
 CityInformation.propTypes = {

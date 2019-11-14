@@ -9,15 +9,6 @@ import Paragraph from '../components/atoms/Paragraph/Paragraph';
 import Input from '../components/atoms/Input/Input';
 import Button from '../components/atoms/Button/Button';
 import Spinner from '../components/Spinner/Spinner';
-import { backgroundURL } from '../components/utils/variables';
-
-const StyledWrapper = styled.div`
-  width: 100%;
-  height: 100vh;
-  background: url(${backgroundURL});
-  background-size: cover;
-  background-position: center;
-`;
 
 const InnerWrapper = styled.section`
   position: absolute;
@@ -71,7 +62,7 @@ const LandingPage = ({
   setChosenCity
 }) => {
   return (
-    <StyledWrapper>
+    <>
       {citiesLoading ? (
         <Spinner />
       ) : (
@@ -119,7 +110,7 @@ const LandingPage = ({
           )}
         </InnerWrapper>
       )}
-    </StyledWrapper>
+    </>
   );
 };
 

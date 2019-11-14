@@ -6,9 +6,16 @@ import GlobalStyle from '../assets/styles/GlobalStyle';
 import theme from '../assets/styles/theme';
 import Hamburger from '../components/atoms/Hamburger/Hamburger';
 import MenuContextProvider from '../context/MenuContext';
+import { backgroundURL } from '../components/utils/variables';
 
 const StyledWrapper = styled.div`
   width: 100%;
+  min-height: 100vh;
+  background: url(${backgroundURL});
+  background-size: cover;
+  background-position: 30%;
+  margin: 0;
+  padding: 0;
 `;
 
 const MainTemplate = ({ children }) => {

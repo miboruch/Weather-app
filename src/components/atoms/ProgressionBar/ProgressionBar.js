@@ -1,9 +1,9 @@
 import React from 'react';
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 
 const StyledBar = styled.div`
   width: 100px;
-  height: 2px;
+  height: 3px;
   background: #444;
   position: relative;
 
@@ -14,7 +14,7 @@ const StyledBar = styled.div`
     left: 0;
     background: ${({ value, isPressure }) =>
       isPressure ? (value > 1020 ? 'tomato' : 'white') : value > 75 ? 'tomato' : 'white'};
-    height: 2px;
+    height: 3px;
     width: ${({ value, isPressure }) => (isPressure ? `${value / 10 - 40}px` : `${value}px`)};
   }
   

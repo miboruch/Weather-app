@@ -1,22 +1,19 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import ReactSVG from 'react-svg';
 import styled from 'styled-components';
-import Slider from 'react-slick';
+import { Link } from 'react-router-dom';
+import { Controller, Scene } from 'react-scrollmagic';
+import { Tween, Timeline } from 'react-gsap';
 import WeatherBox from '../components/templates/WeatherBox/WeatherBox';
 import Spinner from '../components/Spinner/Spinner';
-import { backgroundURL } from '../components/utils/variables';
-import { getWeatherData } from '../actions/weatherDataActions';
-import { Link } from 'react-router-dom';
+import { getWeatherData, getLocationWeatherData } from '../actions/weatherDataActions';
+import WeatherInfo from '../components/templates/WeatherInfo/WeatherInfo';
+import location from '../assets/images/location.svg';
 
 const StyledWrapper = styled.div`
   width: 100%;
-  min-height: 100vh;
-  background: url(${backgroundURL});
-  background-size: cover;
-  background-position: 30%;
-  margin: 0;
-  padding: 0;
 `;
 
 const StyledArrowWrapper = styled.div`
@@ -38,7 +35,16 @@ const StyledArrowIcon = styled.div`
   font-size: 40px;
 `;
 
-const WeatherPage = ({ loading, getWeather, name, country }) => {
+const StyledIcon = styled(ReactSVG)`
+  position: fixed;
+  right: 7rem;
+  top: 1.5rem;
+  width: 30px;
+  height: 30px;
+  fill: white;
+`;
+
+const WeatherPage = ({ loading, getWeather, name, country, getWeatherByLocation, lat, long }) => {
   useEffect(() => {
     const savedName = localStorage.getItem('name');
     const savedCountry = localStorage.getItem('country');
@@ -51,12 +57,20 @@ const WeatherPage = ({ loading, getWeather, name, country }) => {
 
   return (
     <StyledWrapper>
-      <Link to={'/'}>
+      <Link to='/'>
         <StyledArrowWrapper>
           <StyledArrowIcon>&#8672;</StyledArrowIcon>
         </StyledArrowWrapper>
       </Link>
-      {loading ? <Spinner /> : <WeatherBox />}
+      <StyledIcon src={location} onClick={() => getWeatherByLocation(lat, long)} />
+      {loading ? (
+        <Spinner />
+      ) : (
+        <>
+          <WeatherBox />
+          <WeatherInfo />
+        </>
+      )}
     </StyledWrapper>
   );
 };
@@ -77,7 +91,8 @@ const mapStateToProps = ({
 
 const mapDispatchToProps = dispatch => {
   return {
-    getWeather: (name, country) => dispatch(getWeatherData(name, country))
+    getWeather: (name, country) => dispatch(getWeatherData(name, country)),
+    getWeatherByLocation: (lat, lon) => dispatch(getLocationWeatherData(lat, lon))
   };
 };
 

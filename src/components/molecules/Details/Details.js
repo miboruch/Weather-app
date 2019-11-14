@@ -22,9 +22,6 @@ const StyledSingleBox = styled.section`
 `;
 
 const Details = ({ weatherData }) => {
-  useEffect(() => {
-    console.log(weatherData);
-  }, []);
   return (
     <StyledWrapper>
       <StyledSingleBox>

@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import styled, { css } from 'styled-components';
-import { MenuContext } from '../../../context/MenuContext';
+import { InformationContext } from '../../../context/InformationContext';
 
 const StyledHamburger = styled.button`
   cursor: pointer;
@@ -10,7 +10,7 @@ const StyledHamburger = styled.button`
   border: none;
   z-index: 900;
   position: absolute;
-  top: 0;
+  top: 1.5rem;
   left: 0;
   margin: 1rem;
   :focus {
@@ -22,7 +22,7 @@ const InnerHamburger = styled.div`
   width: 28px;
   height: 2px;
   position: relative;
-  background: #fff;
+  background: ${({ isOpen }) => (isOpen ? '#000' : '#fff')};
   transition: all 0.4s ease;
   ${({ isOpen }) =>
     isOpen &&
@@ -37,7 +37,7 @@ const InnerHamburger = styled.div`
     content: '';
     width: 18px;
     height: 2px;
-    background: #fff;
+    background: ${({ isOpen }) => (isOpen ? '#000' : '#fff')};
     position: absolute;
     left: 0;
     transition: all 0.5s ease;
@@ -52,10 +52,10 @@ const InnerHamburger = styled.div`
 `;
 
 const Hamburger = () => {
-  const { isOpen, toggleMenu } = useContext(MenuContext);
+  const { isOpen, toggleInformation } = useContext(InformationContext);
 
   return (
-    <StyledHamburger onClick={toggleMenu}>
+    <StyledHamburger onClick={toggleInformation}>
       <InnerHamburger isOpen={isOpen} />
     </StyledHamburger>
   );

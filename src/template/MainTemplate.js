@@ -2,22 +2,24 @@ import React from 'react';
 import styled, { ThemeProvider } from 'styled-components';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import ReactSVG from 'react-svg';
+import { connect } from 'react-redux';
 import SEO from '../components/SEO/SEO';
 import GlobalStyle from '../assets/styles/GlobalStyle';
 import theme from '../assets/styles/theme';
 import Hamburger from '../components/atoms/Hamburger/Hamburger';
 import InformationContextProvider from '../context/InformationContext';
 import { backgroundURL } from '../components/utils/variables';
+import {secondBackground} from "../components/utils/variables";
 import WeatherInfo from '../components/templates/WeatherInfo/WeatherInfo';
-import ReactSVG from 'react-svg';
 import location from '../assets/images/location.svg';
 import { getLocationWeatherData } from '../actions/weatherDataActions';
-import { connect } from 'react-redux';
 
 const StyledWrapper = styled.div`
   width: 100%;
   min-height: 100vh;
-  background: url(${backgroundURL});
+  // background: url(${backgroundURL});
+  background: url(${secondBackground});
   background-size: cover;
   background-position: 30%;
   margin: 0;

@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import SingleForecast from '../../atoms/SingleForecast/SingleForecast';
+import ForecastSlider from '../../templates/ForecastSlider/ForecastSlider';
 
 const StyledWrapper = styled.div`
   width: 100%;
@@ -21,10 +22,11 @@ const StyledWrapper = styled.div`
 const Forecast = () => {
   return (
     <StyledWrapper>
-      <SingleForecast offset={0} />
-      <SingleForecast offset={1} />
-      <SingleForecast offset={2} />
-      <SingleForecast offset={3} />
+      {/*<SingleForecast offset={0} />*/}
+      {/*<SingleForecast offset={1} />*/}
+      {/*<SingleForecast offset={2} />*/}
+      {/*<SingleForecast offset={3} />*/}
+      <ForecastSlider />
     </StyledWrapper>
   );
 };

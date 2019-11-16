@@ -7,11 +7,12 @@ import { weekDays } from '../../utils/weekDays';
 import { getForecastTime } from '../../utils/timeFunctions';
 
 const StyledWrapper = styled.section`
-  width: 25%;
+  width: 100%;
   padding: 1rem 0;
   display: flex;
   flex-direction: column;
   justify-content: center;
+  text-align: center;
   position: relative;
 `;
 

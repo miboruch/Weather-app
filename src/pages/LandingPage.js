@@ -22,7 +22,7 @@ const StyledParagraph = styled(Paragraph)`
 `;
 
 const StyledParagraphTopPadding = styled(Paragraph)`
-  padding: 2rem 0;
+  padding: 0.5rem 0;
 `;
 
 const StyledForm = styled(Form)`

@@ -22,10 +22,10 @@ const StyledWrapper = styled.div`
 const Forecast = () => {
   return (
     <StyledWrapper>
-      {/*<SingleForecast offset={0} />*/}
-      {/*<SingleForecast offset={1} />*/}
-      {/*<SingleForecast offset={2} />*/}
-      {/*<SingleForecast offset={3} />*/}
+      {/* <SingleForecast offset={0} /> */}
+      {/* <SingleForecast offset={1} /> */}
+      {/* <SingleForecast offset={2} /> */}
+      {/* <SingleForecast offset={3} /> */}
       <ForecastSlider />
     </StyledWrapper>
   );

@@ -22,7 +22,7 @@ const InnerHamburger = styled.div`
   width: 28px;
   height: 2px;
   position: relative;
-  background: ${({ isOpen }) => (isOpen ? '#000' : '#fff')};
+  background: #fff;
   transition: all 0.4s ease;
   ${({ isOpen }) =>
     isOpen &&
@@ -37,7 +37,7 @@ const InnerHamburger = styled.div`
     content: '';
     width: 18px;
     height: 2px;
-    background: ${({ isOpen }) => (isOpen ? '#000' : '#fff')};
+    background: #fff;
     position: absolute;
     left: 0;
     transition: all 0.5s ease;

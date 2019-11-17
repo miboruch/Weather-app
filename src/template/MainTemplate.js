@@ -9,8 +9,8 @@ import GlobalStyle from '../assets/styles/GlobalStyle';
 import theme from '../assets/styles/theme';
 import Hamburger from '../components/atoms/Hamburger/Hamburger';
 import InformationContextProvider from '../context/InformationContext';
-import { backgroundURL } from '../components/utils/variables';
-import {secondBackground} from "../components/utils/variables";
+import { backgroundURL, secondBackground } from '../components/utils/variables';
+
 import WeatherInfo from '../components/templates/WeatherInfo/WeatherInfo';
 import location from '../assets/images/location.svg';
 import { getLocationWeatherData } from '../actions/weatherDataActions';

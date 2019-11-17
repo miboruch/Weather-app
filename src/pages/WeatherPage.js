@@ -8,7 +8,7 @@ import WeatherBox from '../components/templates/WeatherBox/WeatherBox';
 import Spinner from '../components/Spinner/Spinner';
 import { getWeatherData } from '../actions/weatherDataActions';
 import arrow from '../assets/images/arrow.svg';
-import MainSlider from "../components/templates/MainSlider/MainSlider";
+import MainSlider from '../components/templates/MainSlider/MainSlider';
 
 const StyledWrapper = styled.div`
   width: 100%;
@@ -59,7 +59,7 @@ const WeatherPage = ({ loading, getWeather, name, country }) => {
           <StyledArrowIcon src={arrow} />
         </Link>
       </StyledArrowIconWrapper>
-      {/*{loading ? <Spinner /> : <MainSlider/>}*/}
+      {/* {loading ? <Spinner /> : <MainSlider/>} */}
       {loading ? <Spinner /> : <WeatherBox />}
     </StyledWrapper>
   );

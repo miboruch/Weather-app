@@ -23,6 +23,7 @@ const StyledParagraph = styled(Paragraph)`
 
 const StyledParagraphTopPadding = styled(Paragraph)`
   padding: 0.5rem 0;
+  letter-spacing: 3px;
 `;
 
 const StyledForm = styled(Form)`
@@ -97,7 +98,7 @@ const LandingPage = ({
           ) : (
             <StyledResultBox>
               {result.map((item, index) => (
-                <Link to={'/weather'} key={index}>
+                <Link to='/weather' key={index}>
                   <StyledParagraphTopPadding
                     onClick={() => setChosenCity(item.name, item.country)}
                     large

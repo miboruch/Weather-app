@@ -9,7 +9,7 @@ export const getLocationTime = timezone => {
 
 export const getForecastTime = (timezone, dateTxt) => {
   const cityTimezone = timezone / 3600;
-  const date = new Date(dateTxt);
+  const date = new Date(dateTxt.replace(/\s/, 'T'));
   const currentTimezone = date.getTimezoneOffset() / 60;
   date.setHours(date.getHours() + (cityTimezone + currentTimezone));
 

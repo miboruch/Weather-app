@@ -6,9 +6,14 @@ import Forecast from '../../molecules/Forecast/Forecast';
 import Details from '../../molecules/Details/Details';
 
 const WeatherWrapper = styled.div`
-  width: 100%; /* 50% desktop */
+  width: 100%;
   min-height: 100vh;
   padding-top: 10rem;
+
+  ${({ theme }) => theme.mq.standard} {
+    width: 50%;
+    margin: auto;
+  }
 `;
 
 const WeatherBox = () => {

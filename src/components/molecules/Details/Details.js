@@ -11,6 +11,10 @@ const StyledWrapper = styled.div`
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
+
+  ${({ theme }) => theme.mq.standard} {
+    padding: 0;
+  }
 `;
 
 const StyledSingleBox = styled.section`

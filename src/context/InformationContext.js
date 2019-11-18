@@ -12,11 +12,16 @@ const InformationContextProvider = ({ children }) => {
     setOpen(!isOpen);
   };
 
+  const setInformationOpen = value => {
+    setOpen(value);
+  };
+
   return (
     <InformationContext.Provider
       value={{
         isOpen,
-        toggleInformation
+        toggleInformation,
+        setInformationOpen
       }}
     >
       {children}

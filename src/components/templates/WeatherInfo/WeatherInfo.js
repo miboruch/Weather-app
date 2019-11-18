@@ -1,76 +1,138 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
 import { InformationContext } from '../../../context/InformationContext';
 import Paragraph from '../../atoms/Paragraph/Paragraph';
-import { getSunTime } from '../../utils/timeFunctions';
 import Spinner from '../../Spinner/Spinner';
+import { getLocationTime } from '../../utils/timeFunctions';
 
 const StyledWrapper = styled.div`
   position: fixed;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
   top: 0;
   left: 0;
   width: 100%;
   height: 100vh;
-  background: rgba(0, 0, 0, 0.7);
-  transform: translate(${({ isOpen }) => (isOpen ? '0, 0' : '-100%, -100%')});
+  background: linear-gradient(
+    0deg,
+    rgba(2, 0, 36, 0.7) 0%,
+    rgba(3, 3, 3, 0.9) 50%,
+    rgba(0, 0, 0, 0.8) 100%
+  );
+  transform: translateX(${({ isOpen }) => (isOpen ? '0' : '-100%')});
   transition: transform 1s ease;
   overflow: hidden;
   z-index: 5;
+  border-right: 1px solid rgba(0, 0, 0, 0.7);
+
+  ${({ theme }) => theme.mq.standard} {
+    width: 24%;
+    background: linear-gradient(
+      0deg,
+      rgba(2, 0, 36, 0.22) 0%,
+      rgba(3, 3, 3, 0.6) 50%,
+      rgba(0, 0, 0, 0.22) 100%
+    );
+  }
 `;
 
 const StyledBox = styled.div`
   width: 80%;
   margin: auto;
-  display: flex;
-  align-items: center;
-  flex-direction: column;
 `;
 
 const StyledParagraph = styled(Paragraph)`
   color: white;
 `;
 
-const WeatherInfo = ({ cityData, weatherData, loading }) => {
+const StyledAbsoluteParagraph = styled(StyledParagraph)`
+  position: absolute;
+  bottom: 1rem;
+  left: 50%;
+  transform: translateX(-50%);
+`;
+
+const useTime = timezone => {
+  const [time, setTime] = useState(getLocationTime(timezone).toLocaleString());
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setTime(getLocationTime(timezone).toLocaleTimeString());
+    }, 1000);
+    return () => clearInterval(interval);
+  });
+  return time;
+};
+
+const WeatherInfo = ({ cityData, weatherData, loading, currentOffset }) => {
+  const currentTime = useTime(cityData.timezone);
   const { isOpen } = useContext(InformationContext);
   const { name, country, population } = cityData;
-  console.log(cityData);
-  console.log(weatherData);
   return (
     <StyledWrapper isOpen={isOpen}>
       {loading ? (
         <Spinner />
       ) : (
         <StyledBox>
-          <StyledParagraph large>
+          <StyledParagraph city>
             {name}, {country}
           </StyledParagraph>
-          <StyledParagraph>Population: {population}</StyledParagraph>
-          <StyledParagraph>Date: {new Date().toLocaleTimeString()}</StyledParagraph>
-          <StyledParagraph>Clouds: {weatherData[0].clouds.all}%</StyledParagraph>
-          <StyledParagraph>Humidity: {weatherData[0].main.humidity}%</StyledParagraph>
           <StyledParagraph>
-            Temperature: {weatherData[0].main.temp}
-            <sup>o</sup>C
+            Population: <strong>{population}</strong>
           </StyledParagraph>
           <StyledParagraph>
-            Max temperature: {weatherData[0].main.temp_max}
-            <sup>o</sup>C
+            Date: <strong>{new Date(weatherData[currentOffset].dt_txt).toLocaleString()}</strong>
           </StyledParagraph>
           <StyledParagraph>
-            Min temperature: {weatherData[0].main.temp_min}
-            <sup>o</sup>C
+            Clouds: <strong>{weatherData[currentOffset].clouds.all}%</strong>
           </StyledParagraph>
-          <StyledParagraph>{weatherData[0].weather[0].main}</StyledParagraph>
-          <StyledParagraph>{weatherData[0].wind.speed}m/s</StyledParagraph>
+          <StyledParagraph>
+            Humidity: <strong>{weatherData[currentOffset].main.humidity}%</strong>
+          </StyledParagraph>
+          <StyledParagraph>
+            Temperature:{' '}
+            <strong>
+              {weatherData[currentOffset].main.temp}
+              <sup>o</sup>C
+            </strong>
+          </StyledParagraph>
+          <StyledParagraph>
+            Max temperature:{' '}
+            <strong>
+              {weatherData[currentOffset].main.temp_max}
+              <sup>o</sup>C
+            </strong>
+          </StyledParagraph>
+          <StyledParagraph>
+            Min temperature:{' '}
+            <strong>
+              {weatherData[currentOffset].main.temp_min}
+              <sup>o</sup>C
+            </strong>
+          </StyledParagraph>
+          <StyledParagraph>
+            Description: <strong>{weatherData[currentOffset].weather[0].main}</strong>
+          </StyledParagraph>
+          <StyledParagraph>
+            Wind: <strong>{weatherData[currentOffset].wind.speed}m/s</strong>
+          </StyledParagraph>
+          <StyledAbsoluteParagraph>
+            <strong>{currentTime}</strong>
+          </StyledAbsoluteParagraph>
         </StyledBox>
       )}
     </StyledWrapper>
   );
 };
 
-const mapStateToProps = ({ weatherDataReducer: { cityData, weatherData, loading } }) => {
-  return { cityData, weatherData, loading };
+const mapStateToProps = ({
+  weatherDataReducer: { cityData, weatherData, loading },
+  loadCitiesReducer: { currentOffset }
+}) => {
+  return { cityData, weatherData, loading, currentOffset };
 };
 
 export default connect(mapStateToProps)(WeatherInfo);

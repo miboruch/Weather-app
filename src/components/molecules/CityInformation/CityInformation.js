@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
@@ -12,13 +12,27 @@ const StyledWrapper = styled.div`
   flex-direction: column;
 `;
 
+const useTime = timezone => {
+  const [time, setTime] = useState(getLocationTime(timezone).toLocaleString());
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setTime(getLocationTime(timezone).toLocaleString());
+    }, 1000);
+    return () => clearInterval(interval);
+  });
+  return time;
+};
+
 const CityInformation = ({ cityData: { population, name, timezone, country } }) => {
-  const currentData = getLocationTime(timezone).toLocaleString();
+  const currentData = useTime(timezone);
   const weekDay = weekDays[getLocationTime(timezone).getDay()];
 
   return (
     <StyledWrapper>
-      <Paragraph city>{name}, {country}</Paragraph>
+      <Paragraph city>
+        {name}, {country}
+      </Paragraph>
       <Paragraph medium>
         {weekDay} {currentData}
       </Paragraph>

@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { LOAD_START, LOAD_SUCCESS, LOAD_FAILURE } from '../reducers/loadCitiesReducer';
+import { LOAD_START, LOAD_SUCCESS, LOAD_FAILURE, SET_OFFSET } from '../reducers/loadCitiesReducer';
 
 const loadStart = () => {
   return {
@@ -21,6 +21,15 @@ const loadFailure = error => {
     type: LOAD_FAILURE,
     payload: {
       error
+    }
+  };
+};
+
+export const setOffset = offset => {
+  return {
+    type: SET_OFFSET,
+    payload: {
+      offset
     }
   };
 };

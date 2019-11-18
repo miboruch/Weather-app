@@ -1,11 +1,13 @@
 export const LOAD_START = 'LOAD_START';
 export const LOAD_SUCCESS = 'LOAD_SUCCESS';
 export const LOAD_FAILURE = 'LOAD_FAILURE';
+export const SET_OFFSET = 'SET_OFFSET';
 
 const initialState = {
   citiesLoading: true,
   cities: undefined,
-  error: null
+  error: null,
+  currentOffset: 0
 };
 
 export const loadCitiesReducer = (state = initialState, action) => {
@@ -27,6 +29,11 @@ export const loadCitiesReducer = (state = initialState, action) => {
         ...state,
         citiesLoading: false,
         error: action.payload.error
+      };
+    case SET_OFFSET:
+      return {
+        ...state,
+        currentOffset: action.payload.offset
       };
     default:
       return state;

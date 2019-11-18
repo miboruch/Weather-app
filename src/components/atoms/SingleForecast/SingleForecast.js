@@ -1,10 +1,12 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import Paragraph from '../Paragraph/Paragraph';
 import { weekDays } from '../../utils/weekDays';
 import { getForecastTime } from '../../utils/timeFunctions';
+import { setOffset } from '../../../actions/loadCitiesAction';
+import { InformationContext } from '../../../context/InformationContext';
 
 const StyledWrapper = styled.section`
   width: 100%;
@@ -14,6 +16,7 @@ const StyledWrapper = styled.section`
   justify-content: center;
   text-align: center;
   position: relative;
+  cursor: pointer;
 `;
 
 const StyledParagraph = styled(Paragraph)`
@@ -28,7 +31,9 @@ const StyledImage = styled.img`
   margin-right: auto;
 `;
 
-const SingleForecast = ({ offset, weatherData, cityData: { timezone } }) => {
+const SingleForecast = ({ offset, weatherData, cityData: { timezone }, setCurrentOffset }) => {
+  const { setInformationOpen } = useContext(InformationContext);
+
   const { fullDate, time, date } = getForecastTime(timezone, weatherData[offset].dt_txt);
   const forecastWeekDay = weekDays[fullDate.getDay()];
   const forecastTemperature = weatherData[offset].main.temp;
@@ -36,8 +41,14 @@ const SingleForecast = ({ offset, weatherData, cityData: { timezone } }) => {
   const iconURL = `http://openweathermap.org/img/wn/${icon}@2x.png`;
   const { main } = weatherData[offset].weather[0];
 
+  const openInfo = offsetValue => {
+    setInformationOpen(false);
+    setCurrentOffset(offsetValue);
+    setInformationOpen(true);
+  };
+
   return (
-    <StyledWrapper>
+    <StyledWrapper onClick={() => openInfo(offset)}>
       <StyledParagraph small>{date}</StyledParagraph>
       <StyledParagraph large>{time}</StyledParagraph>
       <StyledParagraph medium>{forecastWeekDay}</StyledParagraph>
@@ -55,8 +66,17 @@ const mapStateToProps = ({ weatherDataReducer: { weatherData, cityData } }) => {
   return { weatherData, cityData };
 };
 
+const mapDispatchToProps = dispatch => {
+  return {
+    setCurrentOffset: offset => dispatch(setOffset(offset))
+  };
+};
+
 SingleForecast.propTypes = {
   offset: PropTypes.number.isRequired
 };
 
-export default connect(mapStateToProps)(SingleForecast);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(SingleForecast);

@@ -36,7 +36,7 @@ const StyledIconWrapper = styled.div`
   justify-content: center;
   flex-direction: column;
   align-items: center;
-  border: 1px dashed #fff;
+  border: 1px dotted #fff;
   border-radius: 50%;
 `;
 

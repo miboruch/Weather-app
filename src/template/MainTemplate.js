@@ -10,15 +10,12 @@ import theme from '../assets/styles/theme';
 import Hamburger from '../components/atoms/Hamburger/Hamburger';
 import InformationContextProvider from '../context/InformationContext';
 import { backgroundURL, secondBackground } from '../components/utils/variables';
-
-import WeatherInfo from '../components/templates/WeatherInfo/WeatherInfo';
 import location from '../assets/images/location.svg';
 import { getLocationWeatherData } from '../actions/weatherDataActions';
 
 const StyledWrapper = styled.div`
   width: 100%;
   min-height: 100vh;
-  // background: url(${backgroundURL});
   background: url(${secondBackground});
   background-size: cover;
   background-position: 30%;
@@ -65,7 +62,6 @@ const MainTemplate = ({ children, getWeatherByLocation, lat, long }) => {
             </StyledIconWrapper>
           </Link>
           <Hamburger />
-          <WeatherInfo />
           {children}
         </ThemeProvider>
       </InformationContextProvider>

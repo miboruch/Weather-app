@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
+import { animated, useTrail } from 'react-spring';
 import { InformationContext } from '../../../context/InformationContext';
 import Paragraph from '../../atoms/Paragraph/Paragraph';
 import Spinner from '../../Spinner/Spinner';
@@ -44,7 +45,7 @@ const StyledBox = styled.div`
   margin: auto;
 `;
 
-const StyledParagraph = styled(Paragraph)`
+const StyledParagraph = styled(animated(Paragraph))`
   color: white;
 `;
 
@@ -71,6 +72,64 @@ const WeatherInfo = ({ cityData, weatherData, loading, currentOffset }) => {
   const currentTime = useTime(cityData.timezone);
   const { isOpen } = useContext(InformationContext);
   const { name, country, population } = cityData;
+
+  const data = [
+    {
+      title: 'Population',
+      result: population
+    },
+    {
+      title: 'Date',
+      result: new Date(weatherData[currentOffset].dt_txt).toLocaleString()
+    },
+    {
+      title: 'Clouds',
+      result: `${weatherData[currentOffset].clouds.all}%`
+    },
+    {
+      title: 'Humidity',
+      result: `${weatherData[currentOffset].main.humidity}%`
+    },
+    {
+      title: 'Temperature',
+      result: `${weatherData[currentOffset].main.temp}`,
+      unit: (
+        <>
+          <sup>o</sup>C
+        </>
+      )
+    },
+    {
+      title: 'Max temperature',
+      result: `${weatherData[currentOffset].main.temp_max}`,
+      unit: (
+        <>
+          <sup>o</sup>C
+        </>
+      )
+    },
+    {
+      title: 'Min temperature',
+      result: `${weatherData[currentOffset].main.temp_min}`,
+      unit: (
+        <>
+          <sup>o</sup>C
+        </>
+      )
+    },
+    {
+      title: 'Wind',
+      result: `${weatherData[currentOffset].wind.speed}m/s`
+    }
+  ];
+
+  const trail = useTrail(data.length, {
+    opacity: isOpen ? 1 : 0,
+    transform: `translateX(${isOpen ? '0' : '-30px'})`,
+    from: { opacity: 0, transform: 'translateX(-30px)' },
+    delay: 700
+  });
+
   return (
     <StyledWrapper isOpen={isOpen}>
       {loading ? (
@@ -80,45 +139,13 @@ const WeatherInfo = ({ cityData, weatherData, loading, currentOffset }) => {
           <StyledParagraph city>
             {name}, {country}
           </StyledParagraph>
-          <StyledParagraph>
-            Population: <strong>{population}</strong>
-          </StyledParagraph>
-          <StyledParagraph>
-            Date: <strong>{new Date(weatherData[currentOffset].dt_txt).toLocaleString()}</strong>
-          </StyledParagraph>
-          <StyledParagraph>
-            Clouds: <strong>{weatherData[currentOffset].clouds.all}%</strong>
-          </StyledParagraph>
-          <StyledParagraph>
-            Humidity: <strong>{weatherData[currentOffset].main.humidity}%</strong>
-          </StyledParagraph>
-          <StyledParagraph>
-            Temperature:{' '}
-            <strong>
-              {weatherData[currentOffset].main.temp}
-              <sup>o</sup>C
-            </strong>
-          </StyledParagraph>
-          <StyledParagraph>
-            Max temperature:{' '}
-            <strong>
-              {weatherData[currentOffset].main.temp_max}
-              <sup>o</sup>C
-            </strong>
-          </StyledParagraph>
-          <StyledParagraph>
-            Min temperature:{' '}
-            <strong>
-              {weatherData[currentOffset].main.temp_min}
-              <sup>o</sup>C
-            </strong>
-          </StyledParagraph>
-          <StyledParagraph>
-            Description: <strong>{weatherData[currentOffset].weather[0].main}</strong>
-          </StyledParagraph>
-          <StyledParagraph>
-            Wind: <strong>{weatherData[currentOffset].wind.speed}m/s</strong>
-          </StyledParagraph>
+
+          {trail.map((props, index) => (
+            <StyledParagraph style={props} key={index}>
+              {data[index].title}: {data[index].result} {data[index].unit ? data[index].unit : null}
+            </StyledParagraph>
+          ))}
+
           <StyledAbsoluteParagraph>
             <strong>{currentTime}</strong>
           </StyledAbsoluteParagraph>

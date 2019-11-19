@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
 import ReactSVG from 'react-svg';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';

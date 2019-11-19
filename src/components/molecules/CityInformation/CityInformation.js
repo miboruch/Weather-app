@@ -1,15 +1,20 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
 import Paragraph from '../../atoms/Paragraph/Paragraph';
 import { weekDays } from '../../utils/weekDays';
 import { getLocationTime } from '../../utils/timeFunctions';
+import { fadeIn } from '../../../animations/animations';
+import { animated } from 'react-spring';
 
 const StyledWrapper = styled.div`
   width: 100%;
   display: flex;
   flex-direction: column;
+`;
+
+const StyledParagraph = styled(animated(Paragraph))`
+  color: #fff;
 `;
 
 const useTime = timezone => {
@@ -27,26 +32,23 @@ const useTime = timezone => {
 const CityInformation = ({ cityData: { population, name, timezone, country } }) => {
   const currentData = useTime(timezone);
   const weekDay = weekDays[getLocationTime(timezone).getDay()];
+  const fade = fadeIn(1000, 1000)();
 
   return (
     <StyledWrapper>
-      <Paragraph city>
+      <StyledParagraph style={fade} city>
         {name}, {country}
-      </Paragraph>
+      </StyledParagraph>
       <Paragraph medium>
         {weekDay} {currentData}
       </Paragraph>
-      <Paragraph large> Population: {population}</Paragraph>
+      <Paragraph large>Population: {population}</Paragraph>
     </StyledWrapper>
   );
 };
 
 const mapStateToProps = ({ weatherDataReducer: { cityData } }) => {
   return { cityData };
-};
-
-CityInformation.propTypes = {
-  cityData: PropTypes.object.isRequired
 };
 
 export default connect(mapStateToProps)(CityInformation);

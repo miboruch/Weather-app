@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
+import { animated } from 'react-spring';
 import Paragraph from '../../atoms/Paragraph/Paragraph';
 import { weekDays } from '../../utils/weekDays';
 import { getLocationTime } from '../../utils/timeFunctions';
 import { fadeIn } from '../../../animations/animations';
-import { animated } from 'react-spring';
 
 const StyledWrapper = styled.div`
   width: 100%;

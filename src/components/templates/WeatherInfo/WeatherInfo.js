@@ -19,7 +19,7 @@ const StyledWrapper = styled.div`
   height: 100vh;
   background: linear-gradient(
     0deg,
-    rgba(2, 0, 36, 0.7) 0%,
+    rgba(2, 0, 36, 0.5) 0%,
     rgba(3, 3, 3, 0.9) 50%,
     rgba(0, 0, 0, 0.8) 100%
   );
@@ -33,9 +33,9 @@ const StyledWrapper = styled.div`
     width: 24%;
     background: linear-gradient(
       0deg,
-      rgba(2, 0, 36, 0.22) 0%,
-      rgba(3, 3, 3, 0.6) 50%,
-      rgba(0, 0, 0, 0.22) 100%
+      rgba(2, 0, 36, 0.7) 0%,
+      rgba(3, 3, 3, 0.8) 50%,
+      rgba(0, 0, 0, 0.55) 100%
     );
   }
 `;

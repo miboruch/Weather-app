@@ -16,6 +16,7 @@ const WeatherWrapper = styled(animated.div)`
   ${({ theme }) => theme.mq.standard} {
     width: 50%;
     margin: auto;
+    padding-top: 5rem;
   }
 `;
 

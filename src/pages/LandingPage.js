@@ -60,8 +60,14 @@ const LandingPage = ({
   citySearching,
   result,
   error,
-  setChosenCity
+  setChosenCity,
+  history
 }) => {
+  const setAndRedirect = (name, country) => {
+    setChosenCity(name, country);
+    history.push('/weather');
+  };
+
   return (
     <>
       {citiesLoading ? (
@@ -93,20 +99,22 @@ const LandingPage = ({
               )
             )}
           </Formik>
+
           {error !== null ? (
             <StyledParagraph>{error}</StyledParagraph>
           ) : (
             <StyledResultBox>
-              {result.map((item, index) => (
-                <Link to='/weather' key={index}>
-                  <StyledParagraphTopPadding
-                    onClick={() => setChosenCity(item.name, item.country)}
-                    large
-                  >
-                    {item.name} {item.country}
-                  </StyledParagraphTopPadding>
-                </Link>
-              ))}
+              {result.length === 1
+                ? setAndRedirect(result[0].name, result[0].country)
+                : result.map((item, index) => (
+                    <Link to='/weather' key={index}>
+                      <StyledParagraphTopPadding
+                        onClick={() => setChosenCity(item.name, item.country)}
+                      >
+                        {item.name} {item.country}
+                      </StyledParagraphTopPadding>
+                    </Link>
+                  ))}
             </StyledResultBox>
           )}
         </InnerWrapper>

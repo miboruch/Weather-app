@@ -13,7 +13,7 @@ const StyledWrapper = styled.div`
 `;
 
 const StyledArrowIconWrapper = styled.div`
-  position: fixed;
+  position: absolute;
   top: 1.5rem;
   right: 7rem;
   width: 50px;
@@ -22,7 +22,7 @@ const StyledArrowIconWrapper = styled.div`
   justify-content: center;
   flex-direction: column;
   align-items: center;
-  border: 1px dotted #fff;
+  border: 1px solid #fff;
   border-radius: 50%;
 `;
 
@@ -35,7 +35,7 @@ const StyledArrowIcon = styled(ReactSVG)`
   cursor: pointer;
 
   :hover {
-    fill: lightgreen;
+    fill: lightblue;
   }
 `;
 
@@ -46,7 +46,7 @@ const WeatherPage = ({ loading, getWeather, name, country }) => {
     if (localStorage.getItem('name') && localStorage.getItem('country')) {
       getWeather(savedName, savedCountry);
     } else {
-      getWeather(name, country);
+      getWeather((name = 'Krakow'), (country = 'PL'));
     }
   }, []);
 
@@ -54,7 +54,13 @@ const WeatherPage = ({ loading, getWeather, name, country }) => {
     <StyledWrapper>
       <StyledArrowIconWrapper>
         <Link to='/'>
-          <StyledArrowIcon src={arrow} />
+          <StyledArrowIcon
+            src={arrow}
+            onClick={() => {
+              localStorage.removeItem('name');
+              localStorage.removeItem('country');
+            }}
+          />
         </Link>
       </StyledArrowIconWrapper>
       {loading ? <Spinner /> : <WeatherBox />}

@@ -6,7 +6,7 @@ import Paragraph from '../../atoms/Paragraph/Paragraph';
 
 const StyledWrapper = styled.div`
   width: 100%;
-  padding: 2rem 0;
+  padding-bottom: 5rem;
   display: flex;
   flex-direction: row;
   justify-content: space-between;

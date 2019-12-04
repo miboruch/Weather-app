@@ -34,7 +34,8 @@ const mapDispatchToProps = dispatch => {
 };
 
 App.propTypes = {
-  getGeolocation: PropTypes.func.isRequired
+  getGeolocation: PropTypes.func.isRequired,
+  loadCities: PropTypes.func.isRequired
 };
 
 export default connect(

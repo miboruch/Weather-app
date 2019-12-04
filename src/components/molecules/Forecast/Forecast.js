@@ -12,10 +12,19 @@ const StyledWrapper = styled.div`
   touch-action: none;
   background: linear-gradient(
     0deg,
-    rgba(2, 0, 36, 0.22) 0%,
+    rgba(0, 0, 0, 0.6) 0%,
     rgba(3, 3, 3, 0.6) 50%,
-    rgba(0, 0, 0, 0.22) 100%
+    rgba(2, 0, 36, 0.8) 100%
   );
+
+  ${({ theme }) => theme.mq.standard} {
+    background: linear-gradient(
+      0deg,
+      rgba(0, 0, 0, 0.4) 0%,
+      rgba(3, 3, 3, 0.3) 50%,
+      rgba(2, 0, 36, 0.5) 100%
+    );
+  }
 `;
 
 const Forecast = () => {

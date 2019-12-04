@@ -16,7 +16,7 @@ import { getLocationWeatherData } from '../actions/weatherDataActions';
 const StyledWrapper = styled.div`
   width: 100%;
   min-height: 100vh;
-  background: url(${secondBackground});
+  background: url(${backgroundURL});
   background-size: cover;
   background-position: 30%;
   margin: 0;
@@ -24,7 +24,7 @@ const StyledWrapper = styled.div`
 `;
 
 const StyledIconWrapper = styled.div`
-  position: fixed;
+  position: absolute;
   top: 1.5rem;
   right: 1rem;
   width: 50px;
@@ -33,7 +33,7 @@ const StyledIconWrapper = styled.div`
   justify-content: center;
   flex-direction: column;
   align-items: center;
-  border: 1px dotted #fff;
+  border: 1px solid #fff;
   border-radius: 50%;
 `;
 
@@ -45,7 +45,7 @@ const StyledIcon = styled(ReactSVG)`
   cursor: pointer;
 
   :hover {
-    fill: lightgreen;
+    fill: lightblue;
   }
 `;
 

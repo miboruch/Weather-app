@@ -49,7 +49,21 @@ const StyledIcon = styled(ReactSVG)`
   }
 `;
 
-const MainTemplate = ({ children, getWeatherByLocation, lat, long }) => {
+const StyledDisabledIcon = styled(StyledIcon)`
+  fill: #ccc;
+
+  :hover {
+    cursor: default;
+  }
+`;
+
+const MainTemplate = ({ children, getWeatherByLocation, lat, long, loading }) => {
+  const getLocationWeatherClearStorage = (latitude, longitude) => {
+    localStorage.removeItem('name');
+    localStorage.removeItem('country');
+    getWeatherByLocation(latitude, longitude);
+  };
+
   return (
     <StyledWrapper>
       <SEO />
@@ -58,7 +72,14 @@ const MainTemplate = ({ children, getWeatherByLocation, lat, long }) => {
         <ThemeProvider theme={theme}>
           <Link to='/weather'>
             <StyledIconWrapper>
-              <StyledIcon src={location} onClick={() => getWeatherByLocation(lat, long)} />
+              {loading ? (
+                <StyledDisabledIcon src={location} />
+              ) : (
+                <StyledIcon
+                  src={location}
+                  onClick={() => getLocationWeatherClearStorage(lat, long)}
+                />
+              )}
             </StyledIconWrapper>
           </Link>
           <Hamburger />
@@ -73,10 +94,11 @@ MainTemplate.propTypes = {
   children: PropTypes.element.isRequired
 };
 
-const mapStateToProps = ({ locationReducer: { lat, long } }) => {
+const mapStateToProps = ({ locationReducer: { lat, long, loading } }) => {
   return {
     lat,
-    long
+    long,
+    loading
   };
 };
 

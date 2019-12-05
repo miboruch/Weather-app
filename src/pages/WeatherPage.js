@@ -2,10 +2,9 @@ import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import ReactSVG from 'react-svg';
 import styled from 'styled-components';
-import { Link } from 'react-router-dom';
 import WeatherBox from '../components/templates/WeatherBox/WeatherBox';
 import Spinner from '../components/Spinner/Spinner';
-import { getWeatherData } from '../actions/weatherDataActions';
+import { getWeatherData, getLocationWeatherData } from '../actions/weatherDataActions';
 import arrow from '../assets/images/arrow.svg';
 
 const StyledWrapper = styled.div`
@@ -39,12 +38,23 @@ const StyledArrowIcon = styled(ReactSVG)`
   }
 `;
 
-const WeatherPage = ({ loading, getWeather, name, country }) => {
+const WeatherPage = ({
+  loading,
+  getWeather,
+  getLocationWeather,
+  name,
+  country,
+  lat,
+  long,
+  history
+}) => {
   useEffect(() => {
     const savedName = localStorage.getItem('name');
     const savedCountry = localStorage.getItem('country');
-    if (localStorage.getItem('name') && localStorage.getItem('country')) {
+    if (savedName && savedCountry) {
       getWeather(savedName, savedCountry);
+    } else if (lat && long) {
+      getLocationWeather(lat, long);
     } else {
       getWeather((name = 'Krakow'), (country = 'PL'));
     }
@@ -53,15 +63,14 @@ const WeatherPage = ({ loading, getWeather, name, country }) => {
   return (
     <StyledWrapper>
       <StyledArrowIconWrapper>
-        <Link to='/'>
-          <StyledArrowIcon
-            src={arrow}
-            onClick={() => {
-              localStorage.removeItem('name');
-              localStorage.removeItem('country');
-            }}
-          />
-        </Link>
+        <StyledArrowIcon
+          src={arrow}
+          onClick={() => {
+            localStorage.removeItem('name');
+            localStorage.removeItem('country');
+            history.push('/');
+          }}
+        />
       </StyledArrowIconWrapper>
       {loading ? <Spinner /> : <WeatherBox />}
     </StyledWrapper>
@@ -70,18 +79,22 @@ const WeatherPage = ({ loading, getWeather, name, country }) => {
 
 const mapStateToProps = ({
   weatherDataReducer: { loading },
-  searchCityReducer: { name, country }
+  searchCityReducer: { name, country },
+  locationReducer: { lat, long }
 }) => {
   return {
     loading,
     name,
-    country
+    country,
+    lat,
+    long
   };
 };
 
 const mapDispatchToProps = dispatch => {
   return {
-    getWeather: (name, country) => dispatch(getWeatherData(name, country))
+    getWeather: (name, country) => dispatch(getWeatherData(name, country)),
+    getLocationWeather: (lat, long) => dispatch(getLocationWeatherData(lat, long))
   };
 };
 
